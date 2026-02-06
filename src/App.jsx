@@ -193,7 +193,7 @@ function SuccessAnimation({ girlfriendName, onReset }) {
 }
 
 // Customization Component
-function Customization({ girlfriendName, customMessage, onNameChange, onMessageChange }) {
+function Customization({ girlfriendName, customMessage, onNameChange, onMessageChange, onGenerateLink }) {
   return (
     <div className="fixed top-20 left-4 z-40 bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 max-w-sm border-2 border-pink-200">
       <h3 className="text-xl font-bold text-pink-600 mb-4 flex items-center gap-2">
@@ -226,6 +226,13 @@ function Customization({ girlfriendName, customMessage, onNameChange, onMessageC
             placeholder="Write your heart out..."
           />
         </div>
+
+        <button
+          onClick={onGenerateLink}
+          className="w-full px-4 py-2 bg-gradient-to-r from-pink-500 to-red-500 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-200"
+        >
+          📋 Copy Shareable Link
+        </button>
       </div>
     </div>
   )
@@ -233,12 +240,31 @@ function Customization({ girlfriendName, customMessage, onNameChange, onMessageC
 
 // Main App Component
 export default function App() {
+  // Helper function to get URL parameters
+  const getUrlParam = (param, defaultValue) => {
+    const params = new URLSearchParams(window.location.search)
+    const value = params.get(param)
+    return value ? decodeURIComponent(value) : defaultValue
+  }
+
   const [response, setResponse] = useState(null)
-  const [girlfriendName, setGirlfriendName] = useState('Beautiful')
-  const [customMessage, setCustomMessage] = useState(
-    'Every moment with you feels like a dream come true. Thank you for being my sunshine on cloudy days. 💕'
+  const [girlfriendName, setGirlfriendName] = useState(() => 
+    getUrlParam('name', 'Beautiful')
+  )
+  const [customMessage, setCustomMessage] = useState(() =>
+    getUrlParam('message', 'Every moment with you feels like a dream come true. Thank you for being my sunshine on cloudy days. 💕')
   )
   const [showCustomization, setShowCustomization] = useState(false)
+
+  // Generate shareable link
+  const generateShareLink = () => {
+    const baseUrl = window.location.origin + window.location.pathname
+    const params = new URLSearchParams({
+      name: girlfriendName,
+      message: customMessage
+    })
+    return `${baseUrl}?${params.toString()}`
+  }
 
   const handleYes = useCallback(() => {
     setResponse('yes')
@@ -274,6 +300,14 @@ export default function App() {
           customMessage={customMessage}
           onNameChange={setGirlfriendName}
           onMessageChange={setCustomMessage}
+          onGenerateLink={() => {
+            const link = generateShareLink()
+            navigator.clipboard.writeText(link).then(() => {
+              alert('✨ Shareable link copied to clipboard! Send it to your special someone. 💕')
+            }).catch(() => {
+              alert('Copy this link: ' + link)
+            })
+          }}
         />
       )}
 
