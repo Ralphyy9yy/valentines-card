@@ -312,7 +312,16 @@ export default function App() {
       )}
 
       <div className="z-10 w-full px-4 md:px-8">
-        <h1 className="text-center text-6xl md:text-8xl font-bold bg-gradient-to-r from-pink-600 via-red-600 to-pink-600 bg-clip-text text-transparent mb-2">
+        {/* GIF on top */}
+        <div className="flex justify-center mb-8">
+          <img 
+            src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTl0enVscW90bWEzeGpmN3NtMjFoYW9wNWE3dm90cGdvNGZ2ZmI4byZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/zZbf6UpZslp3nvFjIR/giphy.gif" 
+            alt="Romantic hearts"
+            className="w-40 h-40 md:w-56 md:h-56 rounded-2xl shadow-lg border-4 border-pink-300"
+          />
+        </div>
+
+        <h1 className="text-center text-4xl md:text-6xl font-bold bg-gradient-to-r from-pink-600 via-red-600 to-pink-600 bg-clip-text text-transparent mb-2">
           Will You Be My Valentine?
         </h1>
 
