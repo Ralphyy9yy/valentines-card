@@ -50,13 +50,13 @@ function ValentineButtons({ onYes }) {
   const [isNoPositioned, setIsNoPositioned] = useState(false)
 
   const noMessages = [
-    'No',
-    'Are you sure?',
-    'Really?',
-    'Think again!',
-    'Last chance!',
-    'You might regret this!',
-    'Yes is better! ❤️'
+    "SURE BA? 🥺",
+    "apas ta! 💕",
+    "Pretty please? 🌹",
+    "Think again! 😊",
+    "ayaw kauwaw! 💋",
+    "yesss na laagiiii! 😉",
+    "hilak ko ronn! 😭",
   ]
 
   const handleNoHover = useCallback(() => {
