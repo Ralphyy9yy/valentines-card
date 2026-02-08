@@ -4,12 +4,12 @@ import React, { useState } from 'react'
 export default function ValentineButtons({ onYes, onNo }) {
   const [noButtonPos, setNoButtonPos] = useState({ x: 0, y: 0 })
   const [noMessages, setNoMessages] = useState([
-    "You sure? 🥺",
-    "Come on! 💕",
+    "SURE BA? 🥺",
+    "apas ta! 💕",
     "Pretty please? 🌹",
     "Think again! 😊",
-    "Don't be shy! 💋",
-    "Hmm, try the other button! 😉",
+    "ayaw kauwaw! 💋",
+    "yesss na laagiiii! 😉",
   ])
   const [currentMessage, setCurrentMessage] = useState('')
   const [messageVisible, setMessageVisible] = useState(false)
