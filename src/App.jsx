@@ -110,42 +110,43 @@ function ValentineButtons({ onYes }) {
 // Optimized Success Animation Component
 function SuccessAnimation({ girlfriendName, onReset }) {
   useEffect(() => {
-    // Reduced heart count from 100 to 30
-    for (let i = 0; i < 30; i++) {
+    // Create confetti-style heart animation
+    for (let i = 0; i < 50; i++) {
       setTimeout(() => {
         const heart = document.createElement('div')
-        heart.innerHTML = ['❤️', '💕', '💖'][i % 3]
+        heart.innerHTML = ['❤️', '💕', '💖', '💗', '💝'][i % 5]
         heart.style.cssText = `
           position: fixed;
-          left: 50%;
-          top: 50%;
-          font-size: 2rem;
+          font-size: ${Math.random() * 2 + 1}rem;
           pointer-events: none;
           z-index: 9999;
+          left: ${Math.random() * 100}%;
+          top: -50px;
         `
-        
-        const angle = (Math.PI * 2 * i) / 30
-        const velocity = 8
-        const vx = Math.cos(angle) * velocity
-        const vy = Math.sin(angle) * velocity
         
         document.body.appendChild(heart)
         
-        let x = 0, y = 0, frame = 0
+        let x = 0, y = 0, frame = 0, rotation = 0
+        const xVelocity = (Math.random() - 0.5) * 6
+        const yVelocity = Math.random() * 3 + 3
+        const rotateVelocity = Math.random() * 10 - 5
+        
         const animate = () => {
-          if (frame > 60) {
+          if (frame > 120) {
             heart.remove()
             return
           }
-          x += vx
-          y += vy
+          x += xVelocity
+          y += yVelocity
+          rotation += rotateVelocity
           frame++
-          heart.style.transform = `translate(${x}px, ${y}px) scale(${1 - frame / 80})`
-          heart.style.opacity = Math.max(0, 1 - frame / 60)
+          
+          heart.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${rotation}deg)`
+          heart.style.opacity = Math.max(0, 1 - (frame - 90) / 30)
           requestAnimationFrame(animate)
         }
         requestAnimationFrame(animate)
-      }, i * 20)
+      }, i * 40)
     }
   }, [])
 
